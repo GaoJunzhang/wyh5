@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <title>国风极乐夜</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <script src="./jquery-3.1.0.min.js"></script>
+    <script typet="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <style>
+        .video {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            object-fit: fill;
+            z-index: 3;
+        }
+
+        .loding {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: url("./images/logingBg_03.jpg");
+            background-size: 100% 100%;
+            z-index: 5;
+        }
+
+        .loding .logo {
+            position: absolute;
+            left: 50%;
+            top: 35%;
+            transform: translate(-50%, -50%);
+            transform-origin: 50% 50%;
+            width: 130px;
+            height: 130px;
+        }
+
+        .loding .lodingTxt {
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%, -50%);
+            transform-origin: 50% 50%;
+            text-align: center;
+        }
+        .lodingTxt img{
+            width: 70%;
+        }
+
+        .logo img {
+            height: 100%;
+            width: 100%;
+            animation: spin 5s infinite linear;
+            transform-origin: center center;
+        }
+        .choseMusic {
+            background: url("./images/k1.jpg");
+            background-size: 100% 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            display: none;
+        }
+
+        .btns {
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 8%;
+        }
+
+        .btns img {
+            width: 45%;
+            margin: 0 2.5%;
+            float: left;
+        }
+
+        .endPage {
+            width: 100%;
+            height: 100%;
+            background: url("./images/gs.png");
+            background-size: 100% 100%!important;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 2;
+        }
+        .innnnben{
+            position: absolute;
+            left: 0;
+            bottom: 10%;
+            width: 100%;
+        }
+        .goon {
+            width: 220px;
+            height: 60px;
+            background: url("./images/goon.png");
+            background-size: 100% 100%;
+            margin-top: 28px;
+            float: left;
+            margin-left: 20px;
+        }
+
+        .save1 {
+            width: 65px;
+            height: 65px;
+            background: url("./images/save.png");
+            background-size: 100% 100%;
+            margin-top: 28px;
+            float: right;
+            margin-right: 30px;
+        }
+
+        .saveImg1 {
+            opacity: 0;
+        }
+
+        .endWarp {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            /*background:;*/
+            background-size: 100% 100% !important;
+            z-index: 1;
+            display: none;
+        }
+
+        .ew {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background:url("images/16.jpg");
+            background-size: 100% 100% !important;
+            z-index: 0;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .cl{
+            width: 100%;
+            height: 100%;
+            background:url("./images/bg1.jpg") no-repeat;
+            background-size: 100% 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 4;
+            text-align: center;
+        }
+        .cl img{
+            width: 60%;
+            position: absolute;
+            bottom: 18%;
+            left: 50%;
+            animation: spi2n 3s infinite linear;
+            margin-left: -30%;
+        }
+        .ha{
+            position: absolute;
+            right:0%;
+            top:0;
+            width: 100%;
+            height: 100%;
+            background: url("./images/k2.png");
+            animation: spi3n 2s infinite linear;
+            background-size: 100% 100%;
+        }
+        @keyframes spi2n {
+            0% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+        @keyframes spi3n {
+            0% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+        .k3{
+            width: 80%;
+            line-height: 125px;
+            background: url(./images/k3.png);
+            background-size: 100% 100%;
+            z-index: 2;
+            position: absolute;
+            left: 50%;
+            bottom: 17%;
+            transform: translateX(-50%);
+            /* background-color: white; */
+            text-align: center;
+            font-size: 21px;
+            font-weight: 600;
+        }
+        .t2{
+            width: 75%;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 34px;
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 1s;
+        }
+    </style>
+</head>
+<body>
+<div class="loding">
+    <div class="logo">
+        <img src="./images/lodingBtn_03.png">
+    </div>
+    <div class="lodingTxt">
+        <img src="./images/lod.png" alt="">
+    </div>
+</div>
+<div class="cl">
+    <img src="./images/jjj.png">
+</div>
+<video src="http://nw.incg.net/all.mp4"
+       poster="./images/wx.jpg"
+       x5-video-player-type='h5' x5-video-player-fullscreen="true" playsinline="true"
+       preload="auto"
+       webkit-playsinline="true" class="video videoOne"></video>
+<div class="choseMusic">
+    <p class="t2">
+        轮到你了！是时候展现真正的音乐了！<br>音雄！开腔吧！
+    </p>
+    <span class="ha">
+    </span>
+    <div class="k3"></div>
+    <div class="btns">
+        <img src="./images/change.png" onclick="checkMusic()">
+        <img src="./images/this.png" onclick="choseIsOk()">
+    </div>
+</div>
+<audio id="audiii"></audio>
+<div class="ew"></div>
+<div class="endWarp">
+    <div class="endPage">
+        <div class="innnnben">
+            <div class="goon"></div>
+            <div class="save1">
+                <img class="saveImg1">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var musicList = [
+            {
+                imgUrl: './images/musicname/ch.png',
+                name: '《沧海一声笑》',
+                end: './images/end/ch.jpg',
+                musicUrl: './mp3/ch.mp3',
+            },
+            {
+                imgUrl: './images/musicname/qy.png',
+                name: '《权御天下》',
+                end: './images/end/qy.jpg',
+                musicUrl: './mp3/qy.mp3'
+            },
+            {
+                imgUrl: './images/musicname/nr.png',
+                name: '《女儿情》',
+                end: './images/end/nr.jpg',
+                musicUrl: './mp3/nr.mp3'
+            },
+            {
+                imgUrl: './images/musicname/xg.png',
+                name: '《新贵妃醉酒》',
+                end: './images/end/xg.jpg',
+                musicUrl: './mp3/xg.mp3'
+            },
+            {
+                imgUrl: './images/musicname/xr.png',
+                name: '《血如墨》',
+                end: './images/end/xr.jpg',
+                musicUrl: './mp3/xr.mp3'
+            },
+            {
+                imgUrl: './images/musicname/dc.png',
+                name: '《小城大事》',
+                end: './images/end/dc.jpg',
+                musicUrl: './mp3/dc.mp3'
+            },
+            {
+                imgUrl: './images/musicname/ys.png',
+                name: '《一生所爱》',
+                end: './images/end/ys.jpg',
+                musicUrl: './mp3/ys.mp3'
+            },
+            {
+                imgUrl: './images/musicname/qn.png',
+                name: '《千年等一回》',
+                end: './images/end/qn.jpg',
+                musicUrl: './mp3/qn.mp3'
+            },
+            {
+                imgUrl: './images/musicname/wk.png',
+                name: '《悟空》',
+                end: './images/end/wk.jpg',
+                musicUrl: './mp3/wk.mp3'
+            },
+            {
+                imgUrl: './images/musicname/sc.png',
+                name: '《三寸天堂》',
+                end: './images/end/sc.jpg',
+                musicUrl: './mp3/sc.mp3'
+            },
+            {
+                imgUrl: './images/musicname/jl.png',
+                name: '《锦鲤抄》',
+                end: './images/end/jl.jpg',
+                musicUrl: './mp3/jl.mp3'
+            },
+            {
+                imgUrl: './images/musicname/dy.png',
+                name: '《典狱司》',
+                end: './images/end/dy.jpg',
+                musicUrl: './mp3/dy.mp3'
+            },
+            {
+                imgUrl: './images/musicname/tx.png',
+                name: '《天下》',
+                end: './images/end/tx.jpg',
+                musicUrl: './mp3/tx.mp3'
+            },
+            {
+                imgUrl: './images/musicname/fr.png',
+                name: '《凡人歌》',
+                end: './images/end/fr.jpg',
+                musicUrl: './mp3/fr.mp3'
+            },
+            {
+                imgUrl: './images/musicname/pj.png',
+                name: '《倾尽天下》',
+                end: './images/end/pj.jpg',
+                musicUrl: './mp3/pj.mp3'
+            },
+            {
+                imgUrl: './images/musicname/xt.png',
+                name: '《向天再借五百年》',
+                end: './images/end/xt.jpg',
+                musicUrl: './mp3/xt.mp3'
+            },
+            {
+                imgUrl: './images/musicname/cc.png',
+                name: '《曹操》',
+                end: './images/end/cc.jpg',
+                musicUrl: './mp3/cc.mp3'
+            },
+            {
+                imgUrl: './images/musicname/qny.png',
+                name: '《倩女幽魂》',
+                end: './images/end/qny.jpg',
+                musicUrl: './mp3/qny.mp3'
+            },
+            {
+                imgUrl: './images/musicname/td.png',
+                name: '《天地》',
+                end: './images/end/td.jpg',
+                musicUrl: './mp3/td.mp3'
+            },
+            {
+                imgUrl: './images/musicname/zg.png',
+                name: '《中国话》',
+                end: './images/end/zg.jpg',
+                musicUrl: './mp3/zg.mp3'
+            },
+            {
+                imgUrl: './images/musicname/gs.png',
+                name: '《盖世英雄》',
+                end: './images/end/gs.jpg',
+                musicUrl: './mp3/gs.mp3'
+            },
+            {
+                imgUrl: './images/musicname/tl.png',
+                name: '《天龙八部》',
+                end: './images/end/tl.jpg',
+                musicUrl: './mp3/tl.mp3'
+            },
+            {
+                imgUrl: './images/musicname/hx.png',
+                name: '《画心》',
+                end: './images/end/hx.jpg',
+                musicUrl: './mp3/hx.mp3'
+            },
+            {
+                imgUrl: './images/musicname/jz.png',
+                name: '《卷珠帘》',
+                end: './images/end/jz.jpg',
+                musicUrl: './mp3/jz.mp3'
+            }
+        ],
+        copyMusicList = [],
+        nowMusic = {},
+        audiii,
+        isP = true;
+    $(function () {
+        audiii = document.getElementById('audiii');
+        $('.cl').click(function () {
+            $('.cl').hide();
+            $('.videoOne').show();
+            $('.videoOne')[0].play();
+            audiii.play()
+        });
+        $('.goon').click(function () {
+            $('.videoOne')[0].currentTime = 81
+            $('.endWarp').hide();
+            $('.videoOne').show();
+            $('.videoOne')[0].play()
+        });
+        $('.videoOne')[0].addEventListener('timeupdate', function () {
+            if (this.currentTime >= 20 && isP) {
+                $('.choseMusic').show();
+                $(this).hide();
+                this.pause();
+                isP = false;
+                $('.t2').css({'opacity':1})
+                checkMusic()
+            }
+        })
+        $('.endWarp').show()
+        $('.choseMusic').show()
+        setTimeout(function () {
+            canPlay()
+        },3000);
+    });
+
+    function checkMusic() {
+        if (copyMusicList.length == 0) {
+            copyMusicList = JSON.parse(JSON.stringify(musicList))
+        }
+        var num = copyMusicList.length;
+        var getNum = 1 + parseInt(num * Math.random());
+        var inNowMusic = copyMusicList[getNum - 1];
+        copyMusicList.splice(getNum - 1, 1);
+        nowMusic = inNowMusic;
+        $('.k3').html(nowMusic.name);
+        if(audiii.src!=''){
+            audiii.pause();
+        }
+        audiii.src = nowMusic.musicUrl;
+        audiii.play()
+    }
+    function canPlay() {
+        $('.loding').hide();
+        $('.jincss').show()
+    }
+    function choseIsOk() {
+        audiii.pause();
+        $('.saveImg1').attr('src', nowMusic.end)
+        $('.endWarp').css({'background': 'url("' + nowMusic.end + '")'})
+        $('.choseMusic').hide();
+        $('.videoOne').hide();
+        $('.endPage').show();
+    }
+    function wxConfig(signPackage,shareData){
+        wx.config({
+            beta : true,
+            debug: false,//// 开启调试模式,调用的所有api的返回值会在客户端alert出来
+            appId: signPackage.appId,
+            timestamp: signPackage.timestamp,
+            nonceStr: signPackage.nonceStr ,
+            signature: signPackage.signature ,
+            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage']
+        })
+
+        wx.ready(function () {
+            //分享朋友圈
+            wx.onMenuShareTimeline({
+                title: '你有一封来自唐朝的音雄帖待查收！',
+                link: 'http://nw.incg.net/',
+                imgUrl: 'http://nw.incg.net/home.jpg',// 自定义图标
+                trigger: function (res) {
+                    // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回.
+                    //alert('click shared');
+                },
+                success: function (res) {
+                    //alert('shared success');
+                    //some thing you should do
+                },
+                cancel: function (res) {
+                    //alert('shared cancle');
+                },
+                fail: function (res) {
+                    //alert(JSON.stringify(res));
+                }
+            });
+            //分享给好友
+            wx.onMenuShareAppMessage({
+                title: '你有一封来自唐朝的音雄帖待查收!', // 分享标题
+                desc: '网易云音乐邀您共赴国风极乐夜!', // 分享描述
+                link: 'http://nw.incg.net/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: 'http://nw.incg.net/home.jpg', // 自定义图标
+                type: 'link', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            wx.error(function (res) {
+                console.log(res.errMsg)
+            });
+        });
+    }
+    $.ajax({
+        type: "GET",
+        url: "http://nw.incg.net/api/web/getSign",
+        data: {
+            url:window.location.href
+        },
+        dataType: "json",
+        success: function(data){
+            wxConfig(data)
+        },
+        error:function (err) {
+            console.log(err)
+        }
+    });
+</script>
+</body>
+</html>
